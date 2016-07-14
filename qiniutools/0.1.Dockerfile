@@ -7,7 +7,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 \
   && echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" >> /etc/apt/sources.list.d/mongodb-org-3.0.list
 
 RUN apt-get update && \
-  apt-get install -qy mongodb-org-shell curl \
+  apt-get install -qy dnsutils mongodb-org-shell curl \
   wget telnet mysql-client redis-tools python-pip \
   tmux vim python2.7 python-pymongo \
   apache2-utils iperf tcpdump tcpflow lsof iproute2 \
