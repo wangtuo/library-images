@@ -14,6 +14,10 @@
 - 每个镜像目录中可以包含多个 `Dockerfile` 文件，文件名如 `<tag>.Dockerfile`。`latest.Dockerfile` 是指向某个具体版本的软链接。
 - 对于一些官方镜像不指定命令创建容器无法持续运行的情况，可以新增一个启动时候的入口程序，参考 `ubuntu/start.sh` 文件的写法。
 
+#### 约定
+
+- timezone: UTF-8
+
 ### 构建流程
 
 - `[ library-images ]$ REGISTRY_SERVER=dest.example.com ./build-images.sh` 构建并推送镜像，需事先登录 `docker login dest.example.com`
