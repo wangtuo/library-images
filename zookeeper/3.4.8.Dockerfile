@@ -1,6 +1,8 @@
 FROM java:8-jre
 MAINTAINER QCOS Team <qcos@qiniu.com>
 
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 ARG MIRROR=http://mirrors.aliyun.com/apache
 ARG VERSION=3.4.8
 
