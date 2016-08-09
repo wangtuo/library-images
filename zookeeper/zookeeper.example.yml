@@ -1,6 +1,6 @@
 services:
   node1:
-    image: fuyecheng/zookeeper:3.4.8
+    image: library/zookeeper:3.4.8
     instance-num: 1
     auto-restart: always
     stateful: true
@@ -13,7 +13,7 @@ services:
     volumes: 
         - name=data,unitType=SSD1_1G,fsType=ext4,mountPath=/data
   node2:
-    image: fuyecheng/zookeeper:3.4.8
+    image: library/zookeeper:3.4.8
     instance-num: 1
     auto-restart: always
     stateful: true
@@ -26,7 +26,7 @@ services:
     volumes: 
         - name=data,unitType=SSD1_1G,fsType=ext4,mountPath=/data
   node3:
-    image: fuyecheng/zookeeper:3.4.8
+    image: library/zookeeper:3.4.8
     instance-num: 1
     auto-restart: always
     stateful: true
