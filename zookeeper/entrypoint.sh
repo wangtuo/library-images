@@ -32,6 +32,11 @@ else
 fi
 
 sed -i "s#%%ZOOKEEPER_DATADIR%%#$ZOOKEEPER_DATADIR#g" /opt/zookeeper/conf/zoo.cfg
+sed -i "s#%%ZOOKEEPER_CLIENTPORT%%#$ZOOKEEPER_CLIENTPORT#g" /opt/zookeeper/conf/zoo.cfg
+sed -i "s#%%ZOOKEEPER_TICKTIME%%#$ZOOKEEPER_TICKTIME#g" /opt/zookeeper/conf/zoo.cfg
+sed -i "s#%%ZOOKEEPER_INITLIMIT%%#$ZOOKEEPER_INITLIMIT#g" /opt/zookeeper/conf/zoo.cfg
+sed -i "s#%%ZOOKEEPER_SYNCLIMIT%%#$ZOOKEEPER_SYNCLIMIT#g" /opt/zookeeper/conf/zoo.cfg
+sed -i "s#%%ZOOKEEPER_MAXCLIENTCNXNS%%#$ZOOKEEPER_MAXCLIENTCNXNS#g" /opt/zookeeper/conf/zoo.cfg
 
 for server in $(env | grep ^ZOOKEEPER_SERVER_); do
     ID=$(echo $server | cut -d= -f 1 | grep -oP '\d+')
