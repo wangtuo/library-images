@@ -11,17 +11,14 @@ RUN apt-get update && \
   wget telnet mysql-client redis-tools python-pip \
   tmux vim python2.7 python-pymongo \
   apache2-utils iperf tcpdump tcpflow lsof iproute2 \
-  python-pymongo-ext httpie nginx && \
+  sysbench python-pymongo-ext httpie nginx && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# for redis-cluster setup
 RUN gem install redis
-
 ADD redis-trib.rb /
 
-ADD default.conf /etc/nginx/sites-available/default
-
-COPY start.sh /start.sh
-
-CMD [ "./start.sh" ]
+ADD start.sh /start.sh
+CMD [ "/start.sh" ]
