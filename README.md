@@ -16,11 +16,12 @@
 
 #### 约定
 
-- timezone: UTF-8
+- 使用 timezone GMT+8，避免日志时区混乱
 
 ### 构建流程
 
-- `[ library-images ]$ REGISTRY_SERVER=dest.example.com ./build-images.sh` 构建并推送镜像，需事先登录 `docker login dest.example.com`
+- `[ library-images ]$ REGISTRY_SERVER=dest.example.com ./build-images.sh` 
+    - 需事先登录 `docker login dest.example.com`
 - 官方镜像参考：[https://github.com/docker-library/official-images](https://github.com/docker-library/official-images)
 
 
