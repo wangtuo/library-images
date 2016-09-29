@@ -2,6 +2,7 @@ FROM debian:jessie
 
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+ADD sources.list.jessie /etc/apt/sources.list
 RUN apt-get update && \
     apt-get -y --no-install-recommends install libfontconfig curl ca-certificates && \
     apt-get clean && \
