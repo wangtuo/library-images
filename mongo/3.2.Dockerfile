@@ -65,6 +65,5 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-
 EXPOSE 27017
 CMD ["mongod"]
