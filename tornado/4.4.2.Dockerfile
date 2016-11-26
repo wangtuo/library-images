@@ -1,5 +1,7 @@
 FROM python:3
 
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 WORKDIR /usr/src/app/
 
 COPY pip-douban.conf /etc/pip.conf
