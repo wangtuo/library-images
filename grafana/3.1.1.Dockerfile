@@ -19,7 +19,7 @@ VOLUME ["/grafana"]
 
 EXPOSE 3000
 
-COPY grafana.ini /etc/grafana/grafana.ini
+COPY grafana.3.1.1.ini /etc/grafana/grafana.ini
 COPY start.sh /start.sh
 
 ENTRYPOINT []
