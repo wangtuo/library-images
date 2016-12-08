@@ -1,0 +1,26 @@
+{
+  "type": "datasource",
+  "name": "Qiniu: KIRK Monitor",
+  "id": "kirkmonitor",
+
+  "includes": [
+    {"type": "dashboard", "name": "KIRK Containers", "path": "dashboards/KIRK-Containers.json"},
+    {"type": "dashboard", "name": "KIRK PublicDomains", "path": "dashboards/KIRK-PublicDomains.json"},
+    {"type": "dashboard", "name": "KIRK PublicIPs", "path": "dashboards/KIRK-PublicIPs.json"}
+  ],
+
+  "metrics": true,
+  "alerting": true,
+  "annotations": true,
+
+  "info": {
+    "author": {
+      "name": "Qiniu Limited.",
+      "url": "http://qiniu.com"
+    },
+    "logos": {
+      "small": "img/prometheus_logo.svg",
+      "large": "img/prometheus_logo.svg"
+    }
+  }
+}
