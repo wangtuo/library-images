@@ -2,6 +2,8 @@ FROM debian:jessie
 
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+COPY pandora-grafana-proxy.conf /pandora/proxy.conf
+
 ADD sources.list.jessie /etc/apt/sources.list
 RUN apt-get update && \
     apt-get -y --no-install-recommends install libfontconfig curl ca-certificates && \
@@ -11,6 +13,8 @@ RUN apt-get update && \
     rm /tmp/grafana.deb && \
     curl -L http://7xqd3r.com1.z0.glb.clouddn.com/library_images/gosu-amd64 > /usr/sbin/gosu && \
     chmod +x /usr/sbin/gosu && \
+    curl http://oht9qv125.bkt.clouddn.com/grafanaProxy > /pandora/grafanaProxy && \
+    chmod +x /pandora/grafanaProxy && \
     apt-get remove -y curl && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
@@ -19,8 +23,10 @@ VOLUME ["/grafana"]
 
 EXPOSE 3000
 
+COPY datasource/kirkmonitor /usr/share/grafana/public/app/plugins/datasource/kirkmonitor
+COPY datasource/pandoratsdb /usr/share/grafana/public/app/plugins/datasource/pandoratsdb
 COPY grafana.4.0.0.ini /etc/grafana/grafana.ini
-COPY start.sh /start.sh
+COPY start.4.0.0.sh /start.sh
 
 ENTRYPOINT []
 CMD ["/start.sh"]
