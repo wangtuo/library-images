@@ -25,6 +25,7 @@ EXPOSE 3000
 
 COPY datasource/kirkmonitor /usr/share/grafana/public/app/plugins/datasource/kirkmonitor
 COPY datasource/pandoratsdb /usr/share/grafana/public/app/plugins/datasource/pandoratsdb
+COPY init.4.0.0.db /etc/grafana/init.4.0.0.db
 COPY grafana.4.0.0.ini /etc/grafana/grafana.ini
 COPY start.4.0.0.sh /start.sh
 
