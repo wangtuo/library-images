@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm /tmp/grafana.deb && \
     curl -L http://7xqd3r.com1.z0.glb.clouddn.com/library_images/gosu-amd64 > /usr/sbin/gosu && \
     chmod +x /usr/sbin/gosu && \
-    curl http://oht9qv125.bkt.clouddn.com/grafanaProxy?20161209 > /pandora/grafanaProxy && \
+    curl http://oht9qv125.bkt.clouddn.com/grafanaProxy2?20161209 > /pandora/grafanaProxy && \
     chmod +x /pandora/grafanaProxy && \
     apt-get remove -y curl && \
     apt-get autoremove -y && \
@@ -24,7 +24,10 @@ VOLUME ["/grafana"]
 EXPOSE 3000
 
 COPY datasource/kirkmonitor /usr/share/grafana/public/app/plugins/datasource/kirkmonitor
-COPY datasource/pandoratsdb /usr/share/grafana/public/app/plugins/datasource/pandoratsdb
+COPY datasource/influxdb-config.html /usr/share/grafana/public/app/plugins/datasource/influxdb/partials/config.html
+RUN find /usr/share/grafana/public/app -name "*.js" | xargs sed -i 's/InfluxDB Details/Pandora TSDB Details/g'
+RUN find /usr/share/grafana/public/app -name "*.js" | xargs sed -i 's/localhost:8086/localhost:8999/g'
+COPY datasource/influxdb-plugin.json /usr/share/grafana/public/app/plugins/datasource/influxdb/plugin.json
 COPY init.4.0.0.db /etc/grafana/init.4.0.0.db
 COPY grafana.4.0.0.ini /etc/grafana/grafana.ini
 COPY start.4.0.0.sh /start.sh
