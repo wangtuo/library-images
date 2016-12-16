@@ -15,12 +15,12 @@
     }
   ],
   "id": null,
-  "title": "KIRK Containers",
-  "description": "KIRK Container Detail Dashboard Template",
+  "title": "1-1 应用概览",
+  "description": "",
   "tags": [
     "qiniu",
     "kirk",
-    "container"
+    "service"
   ],
   "style": "dark",
   "timezone": "browser",
@@ -28,7 +28,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -60,8 +60,8 @@
     "list": [
       {
         "current": {
-          "text": "kirk: qcloud.docs@bq",
-          "value": "kirk: qcloud.docs@bq"
+          "text": "ataraxia.nq",
+          "value": "ataraxia.nq"
         },
         "datasource": null,
         "hide": 0,
@@ -74,96 +74,6 @@
         "refresh": 1,
         "regex": "",
         "type": "datasource"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$app",
-        "hide": 1,
-        "includeAll": false,
-        "label": "Stack",
-        "multi": false,
-        "name": "stack",
-        "options": [],
-        "query": "kirk_container_cpu_system",
-        "refresh": 1,
-        "regex": "/stackName=\"(.*?)\"/",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$app",
-        "hide": 1,
-        "includeAll": false,
-        "label": "Service",
-        "multi": false,
-        "name": "service",
-        "options": [],
-        "query": "kirk_container_cpu_system{stackName=\"$stack\"}",
-        "refresh": 1,
-        "regex": "/serviceName=\"(.*?)\"/",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$app",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Container",
-        "multi": false,
-        "name": "podip",
-        "options": [],
-        "query": "kirk_container_cpu_system{stackName=\"$stack\", serviceName=\"$service\"}",
-        "refresh": 1,
-        "regex": "/podip=\"(.*?)\"/",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$app",
-        "hide": 0,
-        "includeAll": true,
-        "label": "DataVolume",
-        "multi": false,
-        "name": "volume",
-        "options": [],
-        "query": "kirk_container_volume_used_bytes{podip=~\"$podip\"}",
-        "refresh": 1,
-        "regex": "/volume_name=\"(.*?)\"/",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$app",
-        "hide": 0,
-        "includeAll": true,
-        "label": "GPUID",
-        "multi": false,
-        "name": "gpuId",
-        "options": [],
-        "query": "kirk_container_gpu_util{podip=~\"$podip\"}",
-        "refresh": 1,
-        "regex": "/gpuId=\"(.*?)\"/",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
       }
     ]
   },
@@ -172,12 +82,124 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 4,
+  "version": 25,
   "links": [],
   "gnetId": null,
   "rows": [
     {
-      "title": "CPU/MEM",
+      "title": "容器",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {},
+          "height": "",
+          "id": 20,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "count(kirk_container_container_state)",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "All",
+              "refId": "C",
+              "step": 60
+            },
+            {
+              "expr": "count(kirk_container_container_state) by (stackName)",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "Stack - {{stackName}}",
+              "refId": "B",
+              "step": 60
+            },
+            {
+              "expr": "count(kirk_container_container_state) by (stackName, serviceName)",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Service - {{stackName}}/{{serviceName}}",
+              "refId": "A",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "容器数量",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": true,
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "CPU / MEM",
       "panels": [
         {
           "aliasColors": {},
@@ -191,6 +213,8 @@
           "legend": {
             "avg": false,
             "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
             "max": false,
             "min": false,
             "show": true,
@@ -200,6 +224,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -207,34 +232,27 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "span": 6,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(sum(rate(kirk_container_cpu_usage{podip=\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=\"$podip\"}) by (stackName, serviceName, podip) / sum(rate(kirk_container_cpu_system{podip=\"$podip\"}[5m])) by (stackName, serviceName, podip))",
+              "expr": "sum((sum(rate(kirk_container_cpu_usage[5m]) *  kirk_container_cpu_total) by (stackName, serviceName, podip) / sum(rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip))) by  (stackName, serviceName)",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "Used",
+              "legendFormat": "Used - {{stackName}}/{{serviceName}}",
               "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "kirk_container_cpu_quota{podip=\"$podip\"}",
-              "intervalFactor": 2,
-              "legendFormat": "Total",
-              "refId": "B",
-              "step": 10
+              "step": 60
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container CPU Usage",
+          "title": "CPU 用量 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
+            "sort": 2,
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -283,6 +301,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -290,35 +309,26 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "span": 6,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "kirk_container_memory_usage{podip=\"$podip\"} + kirk_container_memory_cache{podip=\"$podip\"}",
+              "expr": "sum(kirk_container_memory_usage + kirk_container_memory_cache) by (stackName, serviceName)",
               "intervalFactor": 2,
-              "legendFormat": "Used",
+              "legendFormat": "Used - {{stackName}}/{{serviceName}}",
               "refId": "B",
-              "step": 10
-            },
-            {
-              "expr": "kirk_container_memory_quota{podip=\"$podip\"}",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Total",
-              "metric": "kirk_container_cpu_quota",
-              "refId": "A",
-              "step": 10
+              "step": 60
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container MEM Usage",
+          "title": "MEM 用量 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
+            "sort": 2,
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -345,9 +355,162 @@
               "show": true
             }
           ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {},
+          "id": 13,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "1 - sum(sum(rate(kirk_container_cpu_usage[5m]) *  kirk_container_cpu_total) by (stackName, serviceName, podip) / sum(rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip)) by (stackName, serviceName) / sum(kirk_container_cpu_quota) by (stackName, serviceName)",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Idle - {{stackName}}/{{serviceName}}",
+              "refId": "A",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU 空置率",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 1,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "label": "0% = 用尽",
+              "logBase": 1,
+              "max": "1",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {},
+          "id": 15,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "1 - (sum(kirk_container_memory_usage + kirk_container_memory_cache) by (stackName, serviceName) / sum(kirk_container_memory_quota) by (stackName, serviceName))",
+              "intervalFactor": 2,
+              "legendFormat": "Idle - {{stackName}}/{{serviceName}}",
+              "refId": "B",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "MEM 空置率",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 1,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "label": "0% = 用尽",
+              "logBase": 1,
+              "max": "1",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
       "height": "250px",
       "repeat": null,
@@ -356,7 +519,7 @@
       "collapse": false
     },
     {
-      "title": "GPU Metrics",
+      "title": "GPU",
       "panels": [
         {
           "aliasColors": {},
@@ -379,6 +542,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -387,34 +551,27 @@
           "repeatIteration": 1477033423381,
           "seriesOverrides": [],
           "span": 6,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "kirk_container_gpu_util{podip=\"$podip\",gpuId=\"$gpuId\"}",
+              "expr": "sum(kirk_container_gpu_util) by (stackName, serviceName)",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "Used - GPU#{{gpuId}}",
+              "legendFormat": "Used - {{stackName}}/{{serviceName}}",
               "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "kirk_container_gpu_util{podip=\"$podip\",gpuId=\"$gpuId\"}*0+100",
-              "intervalFactor": 2,
-              "legendFormat": "Total",
-              "refId": "B",
-              "step": 10
+              "step": 60
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container GPU Usage",
+          "title": "GPU 用量 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
+            "sort": 2,
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -463,6 +620,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -471,26 +629,26 @@
           "repeatIteration": 1477033423381,
           "seriesOverrides": [],
           "span": 6,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "kirk_container_gpu_memory{podip=\"$podip\",gpuId=\"$gpuId\"}",
+              "expr": "sum(kirk_container_gpu_memory) by (stackName, serviceName)",
               "intervalFactor": 2,
-              "legendFormat": "Used: GPU#{{gpuId}}",
+              "legendFormat": "Used - {{stackName}}/{{serviceName}}",
               "refId": "B",
-              "step": 10
+              "step": 60
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container GPU-MEM Usage",
+          "title": "显存用量 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
+            "sort": 2,
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -517,18 +675,95 @@
               "show": true
             }
           ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {},
+          "id": 12,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "1 - sum(kirk_container_gpu_util) by (stackName, serviceName) / 100 / count(kirk_container_gpu_util) by (stackName, serviceName)",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Idle - {{stackName}}/{{serviceName}}",
+              "refId": "A",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "GPU 空置率 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 1,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "label": "0% = 用尽",
+              "logBase": 1,
+              "max": "1",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
       "height": "250px",
-      "repeat": "gpuId",
+      "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": true
     },
     {
-      "title": "Network",
+      "title": "网络",
       "panels": [
         {
           "aliasColors": {},
@@ -540,10 +775,12 @@
           "grid": {},
           "id": 3,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": false,
             "max": false,
             "min": false,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": false
@@ -557,34 +794,104 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
+          "span": 6,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(kirk_container_network_rx{podip=\"$podip\"}[5m])*8) by (podip)",
+              "expr": "sum(rate(kirk_container_network_rx[5m])*8) by (stackName, serviceName)",
               "intervalFactor": 2,
-              "legendFormat": "rx",
+              "legendFormat": "In - {{stackName}}/{{serviceName}}",
               "refId": "A",
-              "step": 4
-            },
-            {
-              "expr": "sum(rate(kirk_container_network_tx{podip=\"$podip\"}[5m])*8) by (podip)",
-              "intervalFactor": 2,
-              "legendFormat": "tx",
-              "refId": "B",
-              "step": 4
+              "step": 60
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container Network Bandwidth - Internal",
+          "title": "容器带宽 - rx - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 11,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(kirk_container_network_tx[5m])*8) by (stackName, serviceName)",
+              "intervalFactor": 2,
+              "legendFormat": "Out - {{stackName}}/{{serviceName}}",
+              "refId": "B",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "容器带宽 - tx  - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -613,289 +920,13 @@
           ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
       "height": "250px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": false
-    },
-    {
-      "title": "Root FS",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "$app",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {},
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "kirk_container_rootfs_used_bytes{podip=\"$podip\"}",
-              "intervalFactor": 2,
-              "legendFormat": "Used",
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "kirk_container_rootfs_used_bytes{podip=\"$podip\"}*0 + 10*1024*1024*1024",
-              "intervalFactor": 2,
-              "legendFormat": "Total",
-              "refId": "B",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Container RootFileSystem Usage",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": true
-    },
-    {
-      "title": "DataVolume",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "$app",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {},
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "minSpan": null,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1476854038541,
-          "seriesOverrides": [
-            {}
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "kirk_container_volume_used_bytes{podip=~\"$podip\",volume_name=~\"$volume\"}",
-              "intervalFactor": 2,
-              "legendFormat": "Used - {{volume_name}} mounted to path n/a",
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "kirk_container_volume_total_bytes{podip=~\"$podip\",volume_name=~\"$volume\"}",
-              "intervalFactor": 2,
-              "legendFormat": "Total - {{volume_name}}",
-              "refId": "B",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Container DataVolume Usage",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "$app",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {},
-          "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeatIteration": 1477033423377,
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(kirk_container_volume_read_bytes{podip=~\"$podip\",volume_name=~\"$volume\"}[1m])) by (podip,volume_name)",
-              "intervalFactor": 2,
-              "legendFormat": "Read - {{volume_name}} mounted to path {{mount_path}}",
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "sum(rate(kirk_container_volume_write_bytes{podip=~\"$podip\",volume_name=~\"$volume\"}[1m])) by (podip,volume_name)",
-              "intervalFactor": 2,
-              "legendFormat": "Write - {{volume_name}} mounted to path {{mount_path}}",
-              "refId": "B",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Container DataVolume IO",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "Bps",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
-      "repeat": "volume",
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": true
     }
   ]
 }

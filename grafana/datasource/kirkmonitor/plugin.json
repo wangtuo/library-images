@@ -4,9 +4,10 @@
   "id": "kirkmonitor",
 
   "includes": [
-    {"type": "dashboard", "name": "KIRK Containers", "path": "dashboards/KIRK-Containers.json"},
-    {"type": "dashboard", "name": "KIRK PublicDomains", "path": "dashboards/KIRK-PublicDomains.json"},
-    {"type": "dashboard", "name": "KIRK PublicIPs", "path": "dashboards/KIRK-PublicIPs.json"}
+    {"type": "dashboard", "name": "1-1 应用概览", "path": "dashboards/1-1 应用概览.json"},
+    {"type": "dashboard", "name": "2-1 服务和容器", "path": "dashboards/2-1 服务和容器.json"},
+    {"type": "dashboard", "name": "3-1 公网域名", "path": "dashboards/3-1 公网域名.json"},
+    {"type": "dashboard", "name": "3-2 公网 IP", "path": "dashboards/3-2 公网 IP.json"}
   ],
 
   "metrics": true,

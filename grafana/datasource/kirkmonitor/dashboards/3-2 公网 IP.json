@@ -21,8 +21,8 @@
     }
   ],
   "id": null,
-  "title": "KIRK PublicIPs",
-  "description": "KIRK MAP-PublicIP Dashboard Template",
+  "title": "3-2 公网 IP",
+  "description": "",
   "tags": [
     "qiniu",
     "kirk",
@@ -32,9 +32,9 @@
   "timezone": "browser",
   "editable": true,
   "sharedCrosshair": false,
-  "hideControls": true,
+  "hideControls": false,
   "time": {
-    "from": "now-30m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -66,8 +66,8 @@
     "list": [
       {
         "current": {
-          "text": "kirk: qcloud.docs@bq",
-          "value": "kirk: qcloud.docs@bq"
+          "text": "haikang.lac",
+          "value": "haikang.lac"
         },
         "datasource": null,
         "hide": 0,
@@ -105,12 +105,12 @@
     "list": []
   },
   "schemaVersion": 13,
-  "version": 1,
+  "version": 14,
   "links": [],
   "gnetId": null,
   "rows": [
     {
-      "title": "New row",
+      "title": "概览",
       "panels": [
         {
           "cacheTimeout": null,
@@ -180,7 +180,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Network Out Total Traffic",
+          "title": "出网总流量",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -261,7 +261,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Network In Total Traffic",
+          "title": "入网总流量",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -272,7 +272,19 @@
             }
           ],
           "valueName": "total"
-        },
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": "",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "带宽概览",
+      "panels": [
         {
           "aliasColors": {},
           "bars": false,
@@ -281,6 +293,7 @@
           "error": false,
           "fill": 1,
           "grid": {},
+          "height": "",
           "id": 2,
           "legend": {
             "alignAsTable": true,
@@ -296,6 +309,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 12,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -303,107 +317,36 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "span": 12,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
-              "interval": "30s",
-              "intervalFactor": 2,
-              "legendFormat": "{{ip}}",
-              "metric": "kirk_ap_lb_uplink_total_bytes",
-              "refId": "A",
-              "step": 60
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Network Out",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bps",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "$app",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {},
-          "id": 1,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeatIteration": 1475207397904,
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
               "expr": "sum(rate(kirk_ap_lb_uplink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8 ",
-              "interval": "30s",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{ip}}",
+              "legendFormat": "In - {{ip}}",
               "metric": "kirk_ap_lb_uplink_total_bytes",
               "refId": "A",
-              "step": 60
+              "step": 600
+            },
+            {
+              "expr": "-sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Out - {{ip}}",
+              "metric": "kirk_ap_lb_uplink_total_bytes",
+              "refId": "B",
+              "step": 600
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Network In",
+          "title": "出入带宽",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -433,13 +376,187 @@
           ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
-      "height": "250px",
+      "height": "500px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": false
+    },
+    {
+      "title": "带宽详情",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "height": "300px",
+          "id": 5,
+          "legend": {
+            "alignAsTable": false,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Out - {{ip}}",
+              "metric": "kirk_ap_lb_uplink_total_bytes",
+              "refId": "B",
+              "step": 7200
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "出网带宽 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "height": "300px",
+          "id": 6,
+          "legend": {
+            "alignAsTable": false,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(kirk_ap_lb_uplink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8 ",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "In - {{ip}}",
+              "metric": "kirk_ap_lb_uplink_total_bytes",
+              "refId": "B",
+              "step": 7200
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "入网带宽 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": true,
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": true
     }
   ]
 }
