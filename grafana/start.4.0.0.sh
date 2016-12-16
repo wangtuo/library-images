@@ -18,6 +18,9 @@ fi
 mkdir -p "$GF_PATHS_DATA" "$GF_PATHS_LOGS" "$GF_PATHS_PLUGINS"
 chown -R grafana:grafana "$GF_PATHS_DATA" "$GF_PATHS_LOGS" "$GF_PATHS_CONF"
 
+# set admin password
+echo "admin_password = ${GF_SECURITY_ADMIN_PASSWORD}" >> "$GF_PATHS_CONF"/grafana.ini
+
 if [ ! -d ${GF_INSTALL_PLUGINS} ]; then
   OLDIFS=$IFS
   IFS=','
