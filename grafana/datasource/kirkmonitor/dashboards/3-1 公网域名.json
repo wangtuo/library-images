@@ -21,8 +21,8 @@
     }
   ],
   "id": null,
-  "title": "KIRK PublicDomains",
-  "description": "KIRK MAP-PublicDomain Dashboard Template",
+  "title": "3-1 公网域名",
+  "description": "",
   "tags": [
     "qiniu",
     "kirk",
@@ -34,7 +34,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-12h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -66,8 +66,8 @@
     "list": [
       {
         "current": {
-          "text": "kirk: qcloud.docs@bq",
-          "value": "kirk: qcloud.docs@bq"
+          "text": "pandora.pipeline-apiserver",
+          "value": "pandora.pipeline-apiserver"
         },
         "datasource": null,
         "hide": 0,
@@ -112,7 +112,7 @@
         "query": "kirk_ap_http_codes_total{domain=~\"$domain\"}",
         "refresh": 1,
         "regex": "/.*code=\"([^\"]+)\"/",
-        "sort": 0,
+        "sort": 3,
         "tagValuesQuery": null,
         "tagsQuery": null,
         "type": "query"
@@ -124,12 +124,12 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 3,
+  "version": 17,
   "links": [],
   "gnetId": null,
   "rows": [
     {
-      "title": "Summary",
+      "title": "概览",
       "panels": [
         {
           "cacheTimeout": null,
@@ -199,7 +199,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Network Out Total Traffic",
+          "title": "出网总流量",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -280,7 +280,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Network In Total Traffic",
+          "title": "入网总流量",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -360,7 +360,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Total Queries",
+          "title": "总请求数",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -382,7 +382,7 @@
       "collapse": false
     },
     {
-      "title": "Out/In",
+      "title": "带宽",
       "panels": [
         {
           "aliasColors": {},
@@ -430,17 +430,17 @@
               "legendFormat": "{{domain}}",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 1800
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Network Out",
+          "title": "出入带宽 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -515,17 +515,17 @@
               "legendFormat": "{{domain}}",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 1800
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Network In",
+          "title": "入网带宽",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -555,16 +555,16 @@
           ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
-      "height": "250px",
+      "height": "300px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": false
     },
     {
-      "title": "Queries",
+      "title": "请求",
       "panels": [
         {
           "aliasColors": {},
@@ -594,13 +594,14 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -609,17 +610,17 @@
               "intervalFactor": 2,
               "legendFormat": "{{domain}}",
               "refId": "A",
-              "step": 60
+              "step": 1800
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Incoming Queries per Minutes",
+          "title": "每分钟接受请求数 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 1,
             "value_type": "individual"
           },
           "type": "graph",
@@ -675,14 +676,14 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
-          "minSpan": 12,
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 1,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
+          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -692,17 +693,17 @@
               "intervalFactor": 2,
               "legendFormat": "{{code}} - {{domain}}",
               "refId": "A",
-              "step": 60
+              "step": 1800
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Completed Queries per Minute",
+          "title": "每分钟完成请求数 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -732,7 +733,7 @@
           ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
       "height": "250px",
       "repeat": null,
@@ -741,7 +742,7 @@
       "collapse": false
     },
     {
-      "title": "HTTP Codes",
+      "title": "返回代码",
       "panels": [
         {
           "aliasColors": {},
@@ -789,17 +790,17 @@
               "intervalFactor": 2,
               "legendFormat": "{{code}} - {{domain}}",
               "refId": "A",
-              "step": 60
+              "step": 600
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "[$code] Queries per Minute",
+          "title": "[$code] 每分钟请求数 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -829,13 +830,13 @@
           ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
       "height": "250px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": true
+      "collapse": false
     }
   ]
 }
