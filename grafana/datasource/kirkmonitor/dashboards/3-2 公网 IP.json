@@ -20,7 +20,7 @@
       "version": "4.0.0"
     }
   ],
-  "id": null,
+  "revision": "1.0.1",
   "title": "3-2 公网 IP",
   "description": "",
   "tags": [
@@ -65,10 +65,6 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "haikang.lac",
-          "value": "haikang.lac"
-        },
         "datasource": null,
         "hide": 0,
         "includeAll": false,
@@ -104,8 +100,9 @@
   "annotations": {
     "list": []
   },
+  "refresh": false,
   "schemaVersion": 13,
-  "version": 14,
+  "version": 5,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -299,6 +296,8 @@
             "alignAsTable": true,
             "avg": true,
             "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
             "max": true,
             "min": false,
             "rightSide": true,
@@ -315,9 +314,15 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "/Out.*/i",
+              "stack": "B",
+              "transform": "negative-Y"
+            }
+          ],
           "span": 12,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -330,7 +335,7 @@
               "step": 600
             },
             {
-              "expr": "-sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
+              "expr": "sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Out - {{ip}}",
@@ -342,7 +347,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "出入带宽",
+          "title": "出入带宽 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -429,7 +434,7 @@
               "legendFormat": "Out - {{ip}}",
               "metric": "kirk_ap_lb_uplink_total_bytes",
               "refId": "B",
-              "step": 7200
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -510,7 +515,7 @@
               "legendFormat": "In - {{ip}}",
               "metric": "kirk_ap_lb_uplink_total_bytes",
               "refId": "B",
-              "step": 7200
+              "step": 240
             }
           ],
           "thresholds": [],
