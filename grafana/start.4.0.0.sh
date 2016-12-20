@@ -13,11 +13,6 @@ if [ ! -d ${GF_PATHS_CONF} ]; then
   cp -r /etc/grafana "$GF_PATHS_CONF"
 fi
 
-if [ ! -d ${GF_PATHS_DATA} ]; then
-  mkdir -p ${GF_PATHS_DATA}
-  cp /etc/grafana/init.4.0.0.db ${GF_PATHS_DATA}/grafana.db
-fi
-
 mkdir -p "$GF_PATHS_DATA" "$GF_PATHS_LOGS" "$GF_PATHS_PLUGINS"
 chown -R grafana:grafana "$GF_PATHS_DATA" "$GF_PATHS_LOGS" "$GF_PATHS_CONF"
 
