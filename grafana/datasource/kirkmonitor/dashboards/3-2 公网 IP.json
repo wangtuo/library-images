@@ -20,7 +20,7 @@
       "version": "4.0.0"
     }
   ],
-  "revision": "1.0.1",
+  "id": null,
   "title": "3-2 公网 IP",
   "description": "",
   "tags": [
@@ -332,7 +332,7 @@
               "legendFormat": "In - {{ip}}",
               "metric": "kirk_ap_lb_uplink_total_bytes",
               "refId": "A",
-              "step": 600
+              "step": 1200
             },
             {
               "expr": "sum(rate(kirk_ap_lb_downlink_total_bytes{ip=~\"$ip\"}[2m])) by (ip) * 8",
@@ -341,7 +341,7 @@
               "legendFormat": "Out - {{ip}}",
               "metric": "kirk_ap_lb_uplink_total_bytes",
               "refId": "B",
-              "step": 600
+              "step": 1200
             }
           ],
           "thresholds": [],

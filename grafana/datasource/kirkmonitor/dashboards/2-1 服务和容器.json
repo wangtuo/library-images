@@ -14,7 +14,7 @@
       "version": "4.0.0"
     }
   ],
-  "revision": "1.0.1",
+  "id": null,
   "title": "2-1 服务和容器",
   "description": "",
   "tags": [
@@ -29,7 +29,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -60,6 +60,10 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "pandora.pipeline-apiserver",
+          "value": "pandora.pipeline-apiserver"
+        },
         "datasource": null,
         "hide": 0,
         "includeAll": false,
@@ -169,7 +173,7 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 22,
+  "version": 23,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -1197,7 +1201,7 @@
               "intervalFactor": 2,
               "legendFormat": "In - {{podip}}",
               "refId": "A",
-              "step": 120
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -1274,7 +1278,7 @@
               "intervalFactor": 2,
               "legendFormat": "Out - {{podip}}",
               "refId": "B",
-              "step": 120
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -1490,7 +1494,7 @@
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "collapse": true
     },
     {
       "title": "数据盘",
@@ -1820,7 +1824,7 @@
       "repeat": "volume",
       "repeatRowId": null,
       "repeatIteration": null,
-      "collapse": false
+      "collapse": true
     }
   ]
 }

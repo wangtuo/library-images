@@ -3,12 +3,6 @@
   "__requires": [
     {
       "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    },
-    {
-      "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
@@ -20,7 +14,7 @@
       "version": "4.0.0"
     }
   ],
-  "revision": "1.0.1",
+  "id": null,
   "title": "3-1 公网域名",
   "description": "",
   "tags": [
@@ -34,7 +28,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -82,7 +76,7 @@
         "current": {},
         "datasource": "$app",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "PublicDomain",
         "multi": false,
         "name": "domain",
@@ -120,265 +114,207 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 0,
+  "version": 31,
   "links": [],
   "gnetId": null,
   "rows": [
     {
-      "title": "概览",
+      "title": "全部域名",
       "panels": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
+          "aliasColors": {},
+          "bars": false,
           "datasource": "$app",
-          "decimals": null,
           "editable": true,
           "error": false,
-          "format": "bytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
+          "fill": 1,
+          "grid": {},
           "height": "",
-          "id": 7,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 4,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+          "id": 32,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": null,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": false
           },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/Out.*/i",
+              "stack": "B",
+              "transform": "negative-Y"
+            }
+          ],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(kirk_ap_domain_downlink_total_bytes{domain=~\"$domain\"}[1m]))",
-              "interval": "1m",
+              "expr": "sum(rate(kirk_ap_domain_downlink_total_bytes[2m])) by (domain) * 8",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "",
+              "legendFormat": "Out - {{domain}}",
+              "metric": "",
               "refId": "A",
-              "step": 120
-            }
-          ],
-          "thresholds": "",
-          "title": "出网总流量",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
+              "step": 240
+            },
             {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
+              "expr": "sum(rate(kirk_ap_domain_uplink_total_bytes[2m])) by (domain) * 8 ",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "In - {{domain}}",
+              "metric": "",
+              "refId": "B",
+              "step": 240
             }
           ],
-          "valueName": "total"
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "上下行带宽 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         },
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
+          "aliasColors": {},
+          "bars": false,
           "datasource": "$app",
-          "decimals": null,
           "editable": true,
           "error": false,
-          "format": "bytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+          "fill": 1,
+          "grid": {},
+          "id": 33,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": false
           },
-          "height": "",
-          "id": 3,
-          "interval": null,
+          "lines": true,
+          "linewidth": 2,
           "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
+          "minSpan": 4,
           "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "repeatIteration": 1475207397904,
-          "span": 4,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(kirk_ap_domain_uplink_total_bytes{domain=~\"$domain\"}[1m]))",
-              "interval": "1m",
+              "expr": "sum(60*rate(kirk_ap_http_codes_total{code=~\"$code\"}[2m])) by (code, domain)",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "",
+              "legendFormat": "[{{code}}] - {{domain}}",
               "refId": "A",
-              "step": 120
+              "step": 240
             }
           ],
-          "thresholds": "",
-          "title": "入网总流量",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "total"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "$app",
-          "decimals": null,
-          "editable": true,
-          "error": false,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "每分钟请求数和响应代码 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
           },
-          "height": "",
-          "id": 8,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
             {
-              "name": "value to text",
-              "value": 1
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
             },
             {
-              "name": "range to text",
-              "value": 2
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
             }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 4,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "sum(increase(kirk_ap_domain_queries_total{domain=~\"$domain\"}[1m]))",
-              "interval": "1m",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "refId": "A",
-              "step": 120
-            }
-          ],
-          "thresholds": "",
-          "title": "总请求数",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "total"
+          ]
         }
       ],
-      "showTitle": false,
+      "showTitle": true,
       "titleSize": "h6",
-      "height": "100px",
+      "height": "250px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": false
     },
     {
-      "title": "带宽",
+      "title": "$domain",
       "panels": [
         {
           "aliasColors": {},
@@ -392,11 +328,11 @@
           "id": 2,
           "legend": {
             "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
-            "max": true,
+            "max": false,
             "min": false,
             "rightSide": false,
             "show": true,
@@ -404,18 +340,25 @@
             "sort": "max",
             "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 4,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
+          "seriesOverrides": [
+            {
+              "alias": "/Out.*/i",
+              "stack": "B",
+              "transform": "negative-Y"
+            }
+          ],
+          "span": 4,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -423,16 +366,25 @@
               "expr": "sum(rate(kirk_ap_domain_downlink_total_bytes{domain=~\"$domain\"}[2m])) by (domain) * 8",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{domain}}",
+              "legendFormat": "Out",
               "metric": "",
               "refId": "A",
-              "step": 1800
+              "step": 240
+            },
+            {
+              "expr": "sum(rate(kirk_ap_domain_uplink_total_bytes{domain=~\"$domain\"}[2m])) by (domain) * 8 ",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "In",
+              "metric": "",
+              "refId": "B",
+              "step": 240
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "出入带宽 - 堆叠",
+          "title": "上下行带宽 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -473,51 +425,49 @@
           "error": false,
           "fill": 1,
           "grid": {},
-          "height": "",
-          "id": 1,
+          "id": 28,
           "legend": {
             "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
-            "max": true,
+            "max": false,
             "min": false,
             "rightSide": false,
             "show": true,
             "sort": "max",
             "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 2,
           "links": [],
+          "minSpan": 4,
           "nullPointMode": "connected",
           "percentage": false,
-          "pointradius": 5,
+          "pointradius": 1,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1475207397904,
           "seriesOverrides": [],
-          "span": 6,
+          "span": 4,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(kirk_ap_domain_uplink_total_bytes{domain=~\"$domain\"}[2m])) by (domain) * 8 ",
+              "expr": "sum(60*rate(kirk_ap_http_codes_total{domain=~\"$domain\", code=~\"$code\"}[2m])) by (code)",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{domain}}",
-              "metric": "",
+              "legendFormat": "{{code}}",
               "refId": "A",
-              "step": 1800
+              "step": 240
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "入网带宽",
+          "title": "每分钟请求数和响应代码 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -533,7 +483,109 @@
           },
           "yaxes": [
             {
-              "format": "bps",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 22,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 4,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (domain)",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "平均值",
+              "refId": "A",
+              "step": 240
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\"}[2m])) by (le, domain))",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "95 值",
+              "refId": "B",
+              "step": 240
+            },
+            {
+              "expr": "rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{podip}}",
+              "refId": "C",
+              "step": 40
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "请求响应时间 - 95值/平均值",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -553,14 +605,14 @@
       ],
       "showTitle": true,
       "titleSize": "h6",
-      "height": "300px",
+      "height": "250px",
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
       "collapse": false
     },
     {
-      "title": "请求",
+      "title": "代码和负载均衡",
       "panels": [
         {
           "aliasColors": {},
@@ -568,55 +620,57 @@
           "datasource": "$app",
           "editable": true,
           "error": false,
-          "fill": 1,
+          "fill": 0,
           "grid": {},
-          "height": "",
-          "id": 5,
+          "id": 9,
           "legend": {
             "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
-            "max": true,
+            "max": false,
             "min": false,
             "rightSide": false,
             "show": true,
             "sort": "max",
             "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "minSpan": 3,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "repeat": "code",
+          "repeatIteration": 1476873586676,
           "seriesOverrides": [],
-          "span": 6,
-          "stack": true,
+          "span": 4,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(60 * rate(kirk_ap_domain_queries_total{domain=~\"$domain\"}[2m])) by (domain)",
+              "expr": "sum(60*rate(kirk_ap_http_codes_total{domain=~\"$domain\", code=~\"$code\"}[2m])) by (podip)",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{podip}}",
               "refId": "A",
-              "step": 1800
+              "step": 240
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "每分钟接受请求数 - 堆叠",
+          "title": "[$code] 每分钟请求数",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 1,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -644,33 +698,45 @@
               "show": true
             }
           ]
-        },
+        }
+      ],
+      "showTitle": true,
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "慢请求",
+      "panels": [
         {
           "aliasColors": {},
           "bars": false,
           "datasource": "$app",
           "editable": true,
           "error": false,
-          "fill": 1,
+          "fill": 0,
           "grid": {},
-          "id": 17,
+          "id": 38,
           "legend": {
             "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
-            "max": true,
+            "max": false,
             "min": false,
             "rightSide": false,
             "show": true,
             "sort": "max",
             "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "links": [],
           "minSpan": 6,
           "nullPointMode": "connected",
@@ -680,22 +746,31 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "span": 6,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(60*rate(kirk_ap_http_codes_total{domain=~\"$domain\", code=~\"$code\"}[2m])) by (domain, code)",
+              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (podip)",
+              "hide": true,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{code}} - {{domain}}",
+              "legendFormat": "平均值",
               "refId": "A",
-              "step": 1800
+              "step": 30
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\"}[2m])) by (le, podip))",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{podip}}",
+              "refId": "B",
+              "step": 240
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "每分钟完成请求数 - 堆叠",
+          "title": "请求响应时间 - 95值",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -711,7 +786,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -727,72 +802,59 @@
               "show": true
             }
           ]
-        }
-      ],
-      "showTitle": true,
-      "titleSize": "h6",
-      "height": "250px",
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
-    },
-    {
-      "title": "返回代码",
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
           "datasource": "$app",
           "editable": true,
           "error": false,
-          "fill": 1,
+          "fill": 0,
           "grid": {},
-          "id": 9,
+          "id": 39,
           "legend": {
             "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
-            "max": true,
+            "max": false,
             "min": false,
             "rightSide": false,
             "show": true,
             "sort": "max",
             "sortDesc": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "minSpan": 6,
           "nullPointMode": "connected",
           "percentage": false,
-          "pointradius": 5,
+          "pointradius": 1,
           "points": false,
           "renderer": "flot",
-          "repeat": "code",
-          "repeatIteration": 1476873586676,
           "seriesOverrides": [],
-          "span": 12,
-          "stack": true,
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(60*rate(kirk_ap_http_codes_total{domain=~\"$domain\", code=~\"$code\"}[2m])) by (domain, code)",
+              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (podip)",
+              "hide": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{code}} - {{domain}}",
+              "legendFormat": "{{podip}}",
               "refId": "A",
-              "step": 600
+              "step": 240
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "[$code] 每分钟请求数 - 堆叠",
+          "title": "请求响应时间 - 平均值",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -808,7 +870,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -828,7 +890,7 @@
       ],
       "showTitle": true,
       "titleSize": "h6",
-      "height": "250px",
+      "height": 250,
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,

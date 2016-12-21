@@ -14,7 +14,7 @@
       "version": "4.0.0"
     }
   ],
-  "revision": "1.0.1",
+  "id": null,
   "title": "1-1 应用概览",
   "description": "",
   "tags": [
@@ -78,10 +78,205 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 13,
+  "version": 7,
   "links": [],
   "gnetId": null,
   "rows": [
+    {
+      "title": "公网域名 - 业务服务",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "height": "",
+          "id": 21,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": null,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/Out.*/i",
+              "stack": "B",
+              "transform": "negative-Y"
+            }
+          ],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(kirk_ap_domain_downlink_total_bytes[2m])) by (domain) * 8",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Out - {{domain}}",
+              "metric": "",
+              "refId": "A",
+              "step": 240
+            },
+            {
+              "expr": "sum(rate(kirk_ap_domain_uplink_total_bytes[2m])) by (domain) * 8 ",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "In - {{domain}}",
+              "metric": "",
+              "refId": "B",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "上下行带宽 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "$app",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 22,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 4,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(60*rate(kirk_ap_http_codes_total[2m])) by (code, domain)",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "[{{code}}] - {{domain}}",
+              "refId": "A",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "每分钟请求数和响应代码 - 堆叠",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": true,
+      "titleSize": "h6",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
     {
       "title": "容器",
       "panels": [
@@ -751,7 +946,7 @@
       "collapse": true
     },
     {
-      "title": "网络",
+      "title": "容器网络",
       "panels": [
         {
           "aliasColors": {},
