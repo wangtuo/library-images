@@ -114,7 +114,7 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 31,
+  "version": 36,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -539,7 +539,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (domain)",
+              "expr": "sum(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])) by (domain) / sum(rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (domain)",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -555,15 +555,6 @@
               "legendFormat": "95 值",
               "refId": "B",
               "step": 240
-            },
-            {
-              "expr": "rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{podip}}",
-              "refId": "C",
-              "step": 40
             }
           ],
           "thresholds": [],
@@ -624,14 +615,14 @@
           "grid": {},
           "id": 9,
           "legend": {
-            "alignAsTable": false,
+            "alignAsTable": true,
             "avg": false,
             "current": false,
             "hideEmpty": true,
             "hideZero": true,
             "max": false,
             "min": false,
-            "rightSide": false,
+            "rightSide": true,
             "show": true,
             "sort": "max",
             "sortDesc": true,
@@ -641,7 +632,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 3,
+          "minSpan": 4,
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
