@@ -114,7 +114,7 @@
   },
   "refresh": false,
   "schemaVersion": 13,
-  "version": 36,
+  "version": 2,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -260,7 +260,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(60*rate(kirk_ap_http_codes_total{code=~\"$code\"}[2m])) by (code, domain)",
+              "expr": "sum(60*rate(kirk_ap_http_codes_total[2m])) by (code, domain)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "[{{code}}] - {{domain}}",
@@ -271,7 +271,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "每分钟请求数和响应代码 - 堆叠",
+          "title": "每分钟全部请求数和响应代码 - 堆叠",
           "tooltip": {
             "msResolution": true,
             "shared": true,
