@@ -9,6 +9,11 @@
 # set admin password
 echo "admin_password = ${GF_SECURITY_ADMIN_PASSWORD}" >> /etc/grafana/grafana.ini
 
+# enable anonymous access or not?
+if [[ "$GE_AUTH_ANONYMOUS" != "" ]]; then
+  sed -E -i '/^\[auth\.anonymous\]/,+2 s/enabled = false/enabled = true/' /etc/grafana/grafana.ini
+fi
+
 if [ ! -d ${GF_PATHS_CONF} ]; then
   cp -r /etc/grafana "$GF_PATHS_CONF"
 fi
