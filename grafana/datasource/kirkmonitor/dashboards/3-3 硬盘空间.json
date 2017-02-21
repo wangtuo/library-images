@@ -1,12 +1,26 @@
 {
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.0.0"
+    }
+  ],
   "annotations": {
     "list": []
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
   "hideControls": false,
-  "id": 6,
+  "id": null,
   "links": [],
   "rows": [
     {
@@ -280,12 +294,8 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "pengquanxin.default",
-          "value": "pengquanxin.default"
-        },
         "hide": 0,
-        "label": "app",
+        "label": "App",
         "name": "app",
         "options": [],
         "query": "kirkmonitor",
