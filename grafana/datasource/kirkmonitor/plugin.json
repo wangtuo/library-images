@@ -7,9 +7,8 @@
     {"type": "dashboard", "name": "1-1 应用概览", "path": "dashboards/1-1 应用概览.json"},
     {"type": "dashboard", "name": "2-1 服务和容器", "path": "dashboards/2-1 服务和容器.json"},
     {"type": "dashboard", "name": "3-1 公网域名", "path": "dashboards/3-1 公网域名.json"},
-    {"type": "dashboard", "name": "3-2 公网 IP", "path": "dashboards/3-2 公网 IP.json"},
-    {"type": "dashboard", "name": "3-3 硬盘空间", "path": "dashboards/3-3 硬盘空间.json"}
-  ],
+    {"type": "dashboard", "name": "3-2 公网 IP", "path": "dashboards/3-2 公网 IP.json"}
+],
 
   "metrics": true,
   "alerting": true,
