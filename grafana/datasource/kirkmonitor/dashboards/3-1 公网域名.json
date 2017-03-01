@@ -548,7 +548,7 @@
               "step": 240
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\"}[2m])) by (le, domain))",
+              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\",podip!~\"E.+\"}[2m])) by (le, domain))",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
