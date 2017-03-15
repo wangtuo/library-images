@@ -23,6 +23,8 @@ VOLUME ["/grafana"]
 
 EXPOSE 3000
 
+COPY plugins /grafana/plugins
+COPY assets /usr/share/grafana/public/app/plugins/pili
 COPY datasource/kirkmonitor /usr/share/grafana/public/app/plugins/datasource/kirkmonitor
 COPY datasource/influxdb-config.html /usr/share/grafana/public/app/plugins/datasource/influxdb/partials/config.html
 RUN find /usr/share/grafana/public/app -name "*.js" | xargs sed -i 's/InfluxDB Details/Pandora TSDB Details/g'

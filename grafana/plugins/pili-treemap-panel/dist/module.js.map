@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/module.js"],"names":["TreeMapCtrl"],"mappings":";;;;;;;;AAGQA,iB,iBAAAA,W;;;2BAGJA,W","file":"module.js","sourcesContent":["/**\n * Created by sunfei on 2017/2/23.\n */\nimport {TreeMapCtrl} from './treemap_ctrl';\n\nexport {\n    TreeMapCtrl as PanelCtrl\n};"]}
