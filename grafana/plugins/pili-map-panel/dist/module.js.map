@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/module.js"],"names":["PluginCtrl"],"mappings":";;;;;;;;AAAQA,gB,gBAAAA,U;;;2BAGNA,U","file":"module.js","sourcesContent":["import {PluginCtrl} from './plugin_ctrl';\n\nexport {\n  PluginCtrl as PanelCtrl\n};\n\n"]}
