@@ -741,16 +741,16 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (podip)",
+              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\", podip!~\"E.*\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\", podip!~\"E.*\"}[2m])) by (podip)",
               "hide": true,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "平均值",
+              "legendFormat": "{{podip}}-平均值",
               "refId": "A",
               "step": 30
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\"}[2m])) by (le, podip))",
+              "expr": "histogram_quantile(0.95, sum(rate(kirk_ap_domain_queries_duration_bucket{domain=~\"$domain\", podip!~\"E.*\"}[2m])) by (le, podip))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{podip}}",
@@ -833,7 +833,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\"}[2m])) by (podip)",
+              "expr": "avg(rate(kirk_ap_domain_queries_duration_sum{domain=~\"$domain\", podip!~\"E.*\"}[2m])/rate(kirk_ap_domain_queries_duration_count{domain=~\"$domain\", podip!~\"E.*\"}[2m])) by (podip)",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,

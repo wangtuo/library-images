@@ -219,7 +219,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip))",
+              "expr": "(sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{podip}}",
@@ -299,7 +299,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
+              "expr": "avg(1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Idle - avg",
@@ -307,7 +307,7 @@
               "step": 240
             },
             {
-              "expr": "min(1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
+              "expr": "min(1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Idle - min",
@@ -315,7 +315,7 @@
               "step": 240
             },
             {
-              "expr": "bottomk(5, 1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
+              "expr": "bottomk(5, 1 -  (sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip)) / avg(kirk_container_cpu_quota{podip=~\"$podip\"}) by  (podip))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{podip}}",
@@ -412,7 +412,7 @@
               "step": 240
             },
             {
-              "expr": "avg((sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip)))",
+              "expr": "avg((sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip)))",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Used - avg",
@@ -421,7 +421,7 @@
               "step": 240
             },
             {
-              "expr": "max((sum(rate(kirk_container_cpu_usage{podip=~\"$podip\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\"}[5m])) by (podip)))",
+              "expr": "max((sum(rate(kirk_container_cpu_usage{podip=~\"$podip\", role=~\"user|net\"}[5m]) *  kirk_container_cpu_total{podip=~\"$podip\"}) by (podip) / sum(rate(kirk_container_cpu_system{podip=~\"$podip\", role=~\"user|net\"}[5m])) by (podip)))",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Used - max",
