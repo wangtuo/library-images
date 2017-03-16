@@ -603,21 +603,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(1 - ( kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"} ) / kirk_container_memory_quota{podip=~\"$podip\"})",
+              "expr": "avg(1 - ( sum(kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"}) by (podip) ) / sum(kirk_container_memory_quota{podip=~\"$podip\"}) by (podip))",
               "intervalFactor": 2,
               "legendFormat": "Free - avg",
               "refId": "A",
               "step": 240
             },
             {
-              "expr": "min(1 - ( kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"} ) / kirk_container_memory_quota{podip=~\"$podip\"})",
+              "expr": "min(1 - ( sum(kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"}) by (podip) ) / sum(kirk_container_memory_quota{podip=~\"$podip\"}) by (podip))",
               "intervalFactor": 2,
               "legendFormat": "Free - min",
               "refId": "B",
               "step": 240
             },
             {
-              "expr": "bottomk(5, 1 - ( kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"} ) / kirk_container_memory_quota{podip=~\"$podip\"})",
+              "expr": "bottomk(5, 1 - sum( kirk_container_memory_usage{podip=~\"$podip\"} + kirk_container_memory_cache{podip=~\"$podip\"} ) by (podip) / sum(kirk_container_memory_quota{podip=~\"$podip\"}) by (podip))",
               "intervalFactor": 2,
               "legendFormat": "{{podip}}",
               "refId": "C",
