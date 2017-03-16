@@ -419,7 +419,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum((sum(rate(kirk_container_cpu_usage[5m]) *  kirk_container_cpu_total) by (stackName, serviceName, podip) / sum(rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip))) by  (stackName, serviceName)",
+              "expr": "sum(sum(rate(kirk_container_cpu_usage[5m]) * kirk_container_cpu_total / rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip)) by (stackName, serviceName)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Used - {{stackName}}/{{serviceName}}",
@@ -572,7 +572,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "1 - sum(sum(rate(kirk_container_cpu_usage[5m]) *  kirk_container_cpu_total) by (stackName, serviceName, podip) / sum(rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip)) by (stackName, serviceName) / sum(kirk_container_cpu_quota) by (stackName, serviceName)",
+              "expr": "1 - sum(sum(rate(kirk_container_cpu_usage[5m]) * kirk_container_cpu_total / rate(kirk_container_cpu_system[5m])) by (stackName, serviceName, podip)) by (stackName, serviceName) / sum(kirk_container_cpu_quota) by (stackName, serviceName)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Idle - {{stackName}}/{{serviceName}}",
