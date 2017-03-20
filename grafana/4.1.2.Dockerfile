@@ -12,14 +12,13 @@ RUN apt-get update && \
     dpkg -i /tmp/grafana.deb && \
     rm /tmp/grafana.deb && \
     curl -L http://7xqd3r.com1.z0.glb.clouddn.com/library_images/gosu-amd64 > /usr/sbin/gosu && \
-    chmod +x /usr/sbin/gosu && \
-    curl http://oji8s4dhx.bkt.clouddn.com/grafanaproxy-2017-03-20-13-45-53.tar.gz > /tmp/grafanaProxy.gz && \
-    tar -xzvf /tmp/grafanaProxy.gz && \
-    rm /tmp/grafanaProxy.gz && \
+    chmod +x /usr/sbin/gosu
+RUN curl http://oji8s4dhx.bkt.clouddn.com/grafanaproxy-2017-03-20-13-45-53.tar.gz > /tmp/grafanaProxy.tar.gz && \
+    tar -xzvf /tmp/grafanaProxy.tar.gz -C /tmp/ && rm /tmp/grafanaProxy.tar.gz &&\
     mv /tmp/_package/pandora-pointd  /pandora/grafanaProxy && \
     rm -rf /tmp/_package && \
-    chmod +x /pandora/grafanaProxy && \
-    apt-get remove -y curl && \
+    chmod +x /pandora/grafanaProxy
+RUN apt-get remove -y curl && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
